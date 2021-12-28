@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_types_as_parameter_names
 
+import 'package:ecommerce/home/composent/body.dart';
+import 'package:ecommerce/home/homeScreen.dart';
 import 'package:ecommerce/singupin/forgetpasswordscreen.dart';
 import 'package:flutter/material.dart';
 
@@ -125,11 +127,8 @@ class _forminpuState extends State<forminpu> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       color: Colors.orange,
-                      onPressed: () {
-                        if (_formkey.currentState!.validate()) {
-                          _formkey.currentState!.save();
-                        }
-                      },
+                      onPressed: () =>
+                          Navigator.pushNamed(context, HomeScrennn.routeName),
                       child: Text(
                         "Continue",
                         style: TextStyle(fontSize: 18, color: Colors.white),
