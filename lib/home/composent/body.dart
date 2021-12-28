@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecommerce/home/composent/modele/Product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -90,7 +91,17 @@ class Body extends StatelessWidget {
 //****************************Catigorie */
             Categorie(),
 //******************Diplay Product */
-            ShowProduct()
+            Title(),
+            // ignore: prefer_const_literals_to_create_immutables
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...List.generate(demoProducts.length,
+                      (index) => Productcard(product: demoProducts[index]))
+                ],
+              ),
+            )
           ],
         ),
       ),
@@ -172,20 +183,21 @@ class CardCategirie extends StatelessWidget {
   }
 }
 
-class ShowProduct extends StatelessWidget {
-  const ShowProduct({Key? key}) : super(key: key);
+class Title extends StatelessWidget {
+  const Title({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
       // ignore: prefer_const_literals_to_create_immutables
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20),
+        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
             "Product",
-            style: TextStyle(fontSize: 18, color: Colors.black),
+            style: TextStyle(
+                fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           GestureDetector(
             onTap: () => {},
@@ -194,5 +206,43 @@ class ShowProduct extends StatelessWidget {
         ]),
       ),
     );
+  }
+}
+
+class Productcard extends StatelessWidget {
+  const Productcard({Key? key, required this.product}) : super(key: key);
+  final Product product;
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+        padding: EdgeInsets.only(left: 20),
+        child: SizedBox(
+            width: 140,
+            child: Column(
+              children: [
+                AspectRatio(
+                  aspectRatio: 1.02,
+                  child: Container(
+                    padding: EdgeInsets.all(20),
+                    decoration: BoxDecoration(
+                        color: Colors.grey.withOpacity(0.3),
+                        borderRadius: BorderRadius.circular(15)),
+                    child: Image.asset(product.images[0]),
+                  ),
+                ),
+                Text(
+                  product.title,
+                  style: TextStyle(color: Colors.black),
+                  maxLines: 2,
+                ),
+                Text(
+                  "${demoProducts[0].price}",
+                  style: TextStyle(
+                      fontSize: 19,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.blueAccent),
+                )
+              ],
+            )));
   }
 }
