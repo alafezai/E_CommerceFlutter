@@ -88,7 +88,9 @@ class Body extends StatelessWidget {
             ),
 
 //****************************Catigorie */
-            Categorie()
+            Categorie(),
+//******************Diplay Product */
+            ShowProduct()
           ],
         ),
       ),
@@ -166,6 +168,31 @@ class CardCategirie extends StatelessWidget {
               )
             ],
           )),
+    );
+  }
+}
+
+class ShowProduct extends StatelessWidget {
+  const ShowProduct({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      // ignore: prefer_const_literals_to_create_immutables
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child:
+            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+          Text(
+            "Product",
+            style: TextStyle(fontSize: 18, color: Colors.black),
+          ),
+          GestureDetector(
+            onTap: () => {},
+            child: Text("See More"),
+          )
+        ]),
+      ),
     );
   }
 }
