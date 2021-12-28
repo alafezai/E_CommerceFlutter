@@ -1,4 +1,7 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class Body extends StatelessWidget {
   const Body({Key? key}) : super(key: key);
@@ -8,6 +11,7 @@ class Body extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
+//**********************header Section (panier , notifaction ,search)
             Padding(
                 // ignore: prefer_const_constructors
                 padding: EdgeInsets.symmetric(horizontal: 20),
@@ -30,7 +34,14 @@ class Body extends StatelessWidget {
                               focusedBorder: InputBorder.none,
                               hintText: "Search Product",
                               prefixIcon:
-                                  Image.asset("assets/images/serc.PNG"))),
+                                  // ignore: avoid_unnecessary_containers, sized_box_for_whitespace
+                                  SizedBox(
+                                width: 1,
+                                height: 5,
+                                child: SvgPicture.asset(
+                                    "assets/images/Search Icon.svg",
+                                    fit: BoxFit.none),
+                              ))),
                     ),
                     Container(
                       width: 46,
@@ -38,7 +49,8 @@ class Body extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.2),
                           shape: BoxShape.circle),
-                      child: Image.asset("assets/images/panier.PNG"),
+                      child: SvgPicture.asset("assets/images/Cart Icon.svg",
+                          fit: BoxFit.none),
                     ),
                     Container(
                       width: 46,
@@ -46,13 +58,114 @@ class Body extends StatelessWidget {
                       decoration: BoxDecoration(
                           color: Colors.grey.withOpacity(0.2),
                           shape: BoxShape.circle),
-                      child: Image.asset("assets/images/not.PNG"),
+                      child: SvgPicture.asset("assets/images/Bell.svg",
+                          fit: BoxFit.none),
                     )
                   ],
                 )),
+
+            SizedBox(
+              height: 30,
+            ),
+//***********************************Promo section */
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+              width: double.infinity,
+              //height: 90,
+              decoration: BoxDecoration(
+                  color: Color(0xFF4A3298),
+                  borderRadius: BorderRadius.circular(20)),
+              child: Text.rich(TextSpan(
+                  text: "A summer Surprise\n",
+                  style: TextStyle(color: Colors.white),
+                  children: const [
+                    TextSpan(
+                        text: "Cashback 20%",
+                        style: TextStyle(
+                            fontSize: 24, fontWeight: FontWeight.bold))
+                  ])),
+            ),
+
+//****************************Catigorie */
+            Categorie()
           ],
         ),
       ),
+    );
+  }
+}
+
+// ignore: use_key_in_widget_constructors
+class Categorie extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    List<Map<String, dynamic>> categories = [
+      {"icon": "assets/images/Flash Icon.svg", "text": "Flash Deal"},
+      {"icon": "assets/images/Bill Icon.svg", "text": "Bill"},
+      {"icon": "assets/images/Game Icon.svg", "text": "Game"},
+      {"icon": "assets/images/Gift Icon.svg", "text": "Daily Gift"},
+      {"icon": "assets/images/Discover.svg", "text": "More"},
+    ];
+
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          ...List.generate(
+              categories.length,
+              (index) => CardCategirie(
+                    image: categories[index]["icon"],
+                    titleCategirie: categories[index]["text"],
+                    press: () => {},
+                  ))
+        ],
+      ),
+    );
+  }
+}
+
+class CardCategirie extends StatelessWidget {
+  const CardCategirie(
+      {Key? key,
+      required this.image,
+      required this.titleCategirie,
+      required this.press})
+      : super(key: key);
+
+  final String image;
+  final String titleCategirie;
+  final GestureTapCallback press;
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: press,
+      child: SizedBox(
+          width: 55,
+          child: Column(
+            children: [
+              AspectRatio(
+                aspectRatio: 1,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Color(0xFFFFECDF),
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: SvgPicture.asset(image, fit: BoxFit.none),
+                ),
+              ),
+              SizedBox(
+                height: 5,
+              ),
+              Text(
+                titleCategirie,
+                textAlign: TextAlign.center,
+              )
+            ],
+          )),
     );
   }
 }
