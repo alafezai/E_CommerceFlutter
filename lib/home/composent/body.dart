@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecommerce/detailsScreen/details.dart';
 import 'package:ecommerce/home/composent/modele/Product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -97,8 +98,15 @@ class Body extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  ...List.generate(demoProducts.length,
-                      (index) => Productcard(product: demoProducts[index]))
+                  ...List.generate(
+                      demoProducts.length,
+                      (index) => Productcard(
+                            product: demoProducts[index],
+                            press: () => Navigator.pushNamed(
+                                context, DetailsScreen.routeName,
+                                arguments: ProductDetailsarg(
+                                    product: demoProducts[index])),
+                          ))
                 ],
               ),
             )
@@ -210,39 +218,46 @@ class Title extends StatelessWidget {
 }
 
 class Productcard extends StatelessWidget {
-  const Productcard({Key? key, required this.product}) : super(key: key);
+  const Productcard({Key? key, required this.product, required this.press})
+      : super(key: key);
   final Product product;
+  final GestureTapCallback press;
   @override
   Widget build(BuildContext context) {
     return Padding(
         padding: EdgeInsets.only(left: 20),
-        child: SizedBox(
-            width: 140,
-            child: Column(
-              children: [
-                AspectRatio(
-                  aspectRatio: 1.02,
-                  child: Container(
-                    padding: EdgeInsets.all(20),
-                    decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.3),
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Image.asset(product.images[0]),
+        child: GestureDetector(
+          onTap: press,
+          child: SizedBox(
+              width: 140,
+              child: Column(
+                children: [
+                  AspectRatio(
+                    aspectRatio: 1.02,
+                    child: Container(
+                      padding: EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                          color: Colors.grey.withOpacity(0.3),
+                          borderRadius: BorderRadius.circular(15)),
+                      child: Image.asset(product.images[0]),
+                    ),
                   ),
-                ),
-                Text(
-                  product.title,
-                  style: TextStyle(color: Colors.black),
-                  maxLines: 2,
-                ),
-                Text(
-                  "${demoProducts[0].price}",
-                  style: TextStyle(
-                      fontSize: 19,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blueAccent),
-                )
-              ],
-            )));
+                  Text(
+                    product.title,
+                    style: TextStyle(color: Colors.black),
+                    maxLines: 2,
+                  ),
+                  Text(
+                    "${demoProducts[0].price}",
+                    style: TextStyle(
+                        fontSize: 19,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blueAccent),
+                  )
+                ],
+              )
+              //
+              ),
+        ));
   }
 }

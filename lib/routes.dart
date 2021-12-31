@@ -1,3 +1,4 @@
+import 'package:ecommerce/detailsScreen/details.dart';
 import 'package:ecommerce/home/composent/body.dart';
 import 'package:ecommerce/home/homeScreen.dart';
 import 'package:flutter/cupertino.dart';
@@ -11,4 +12,6 @@ final Map<String, WidgetBuilder> routes = {
   forgetPASSS.routeName: (context) => forgetPASSS(),
   // ignore: prefer_const_constructors
   HomeScrennn.routeName: (context) => HomeScrennn(),
+// ignore: prefer_const_constructors
+  DetailsScreen.routeName: (context) => DetailsScreen(),
 };
