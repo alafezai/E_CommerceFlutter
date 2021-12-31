@@ -1,5 +1,6 @@
 // ignore_for_file: deprecated_member_use
 
+import 'package:ecommerce/home/composent/ProductDetailBody.dart';
 import 'package:ecommerce/home/composent/modele/Product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -29,6 +30,9 @@ class DetailsScreen extends StatelessWidget {
                 ),
               ),
               alignment: Alignment.center)),
+      body: ProductDetailsBody(
+        product: args.product,
+      ),
       // ignore: prefer_const_literals_to_create_immutables
       // actions: <Widget>[
       //   // FlatButton(
