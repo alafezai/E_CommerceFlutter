@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ecommerce/cart/cart.dart';
 import 'package:ecommerce/detailsScreen/details.dart';
 import 'package:ecommerce/home/composent/modele/Product.dart';
 import 'package:flutter/material.dart';
@@ -46,14 +47,18 @@ class Body extends StatelessWidget {
                               ))),
                     ),
                     Container(
-                      width: 46,
-                      height: 46,
-                      decoration: BoxDecoration(
-                          color: Colors.grey.withOpacity(0.2),
-                          shape: BoxShape.circle),
-                      child: SvgPicture.asset("assets/images/Cart Icon.svg",
-                          fit: BoxFit.none),
-                    ),
+                        width: 46,
+                        height: 46,
+                        decoration: BoxDecoration(
+                            color: Colors.grey.withOpacity(0.2),
+                            shape: BoxShape.circle),
+                        child: GestureDetector(
+                          child: SvgPicture.asset("assets/images/Cart Icon.svg",
+                              fit: BoxFit.none),
+                          onTap: () {
+                            Navigator.pushNamed(context, CartScreen.routeName);
+                          },
+                        )),
                     Container(
                       width: 46,
                       height: 46,

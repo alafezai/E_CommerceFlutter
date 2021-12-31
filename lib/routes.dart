@@ -1,3 +1,4 @@
+import 'package:ecommerce/cart/cart.dart';
 import 'package:ecommerce/detailsScreen/details.dart';
 import 'package:ecommerce/home/composent/body.dart';
 import 'package:ecommerce/home/homeScreen.dart';
@@ -14,4 +15,6 @@ final Map<String, WidgetBuilder> routes = {
   HomeScrennn.routeName: (context) => HomeScrennn(),
 // ignore: prefer_const_constructors
   DetailsScreen.routeName: (context) => DetailsScreen(),
+  // ignore: prefer_const_constructors
+  CartScreen.routeName: (context) => CartScreen()
 };
