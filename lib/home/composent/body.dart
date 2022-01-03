@@ -3,6 +3,7 @@
 import 'package:ecommerce/cart/cart.dart';
 import 'package:ecommerce/detailsScreen/details.dart';
 import 'package:ecommerce/home/composent/modele/Product.dart';
+import 'package:ecommerce/home/homeproduct/body.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -17,7 +18,7 @@ class Body extends StatelessWidget {
 //**********************header Section (panier , notifaction ,search)
             Padding(
                 // ignore: prefer_const_constructors
-                padding: EdgeInsets.symmetric(horizontal: 20),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -104,7 +105,8 @@ class Body extends StatelessWidget {
               child: Row(
                 children: [
                   ...List.generate(
-                      demoProducts.length,
+                      /////////////////Lina lina lian//////////////////////
+                      5,
                       (index) => Productcard(
                             product: demoProducts[index],
                             press: () => Navigator.pushNamed(
@@ -208,12 +210,12 @@ class Title extends StatelessWidget {
         child:
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
           Text(
-            "Product",
+            "Popular Product",
             style: TextStyle(
                 fontSize: 20, color: Colors.black, fontWeight: FontWeight.bold),
           ),
           GestureDetector(
-            onTap: () => {},
+            onTap: () => {Navigator.pushNamed(context, BodyProduct.routeName)},
             child: Text("See More"),
           )
         ]),
@@ -257,7 +259,7 @@ class Productcard extends StatelessWidget {
                     style: TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.bold,
-                        color: Colors.blueAccent),
+                        color: Colors.orange),
                   )
                 ],
               )

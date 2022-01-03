@@ -1,9 +1,12 @@
-// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_types_as_parameter_names
+// ignore_for_file: prefer_const_constructors, non_constant_identifier_names, avoid_types_as_parameter_names, deprecated_member_use
 
-import 'package:ecommerce/home/composent/body.dart';
+import 'package:ecommerce/home/composent/modele/user.dart';
 import 'package:ecommerce/home/homeScreen.dart';
+import 'package:ecommerce/singupin/Singup.dart';
 import 'package:ecommerce/singupin/forgetpasswordscreen.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
+import 'package:cool_alert/cool_alert.dart';
 
 class forminpu extends StatefulWidget {
   const forminpu({Key? key}) : super(key: key);
@@ -12,10 +15,15 @@ class forminpu extends StatefulWidget {
   _forminpuState createState() => _forminpuState();
 }
 
+var emailcont = TextEditingController();
+var passwordcont = TextEditingController();
+
 class _forminpuState extends State<forminpu> {
 // ignore: unused_field
-  final _formkey = GlobalKey<FormState>();
   final List<String> errors = [];
+  final _formkey = GlobalKey<FormState>();
+  final List<String> erreur = ["Incorrect information ! ! ! "];
+  bool visible = false;
   bool rember = false;
   @override
   Widget build(BuildContext context) {
@@ -24,10 +32,12 @@ class _forminpuState extends State<forminpu> {
           key: _formkey,
           child: Column(
             children: [
+              ...List.generate(1, (index) => MessageEreur(visible)),
 //Email Field***************************
               Padding(
                   padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                   child: TextFormField(
+                    controller: emailcont,
                     keyboardType: TextInputType.emailAddress,
                     // ignore: avoid_types_as_parameter_names
                     validator: (ValueKey) {
@@ -59,6 +69,7 @@ class _forminpuState extends State<forminpu> {
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
                 child: TextFormField(
+                  controller: passwordcont,
                   validator: (ValueKey) {
                     if (ValueKey!.isEmpty) {
                       return "Please Entrer your password";
@@ -116,7 +127,7 @@ class _forminpuState extends State<forminpu> {
               ),
 //Button Continue
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 30),
+                padding: EdgeInsets.symmetric(horizontal: 20, vertical: 20),
                 child: SizedBox(
                     width: double.infinity,
                     height: 50,
@@ -127,8 +138,34 @@ class _forminpuState extends State<forminpu> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(20)),
                       color: Colors.orange,
-                      onPressed: () =>
-                          Navigator.pushNamed(context, HomeScrennn.routeName),
+                      onPressed: () {
+                        // if (_formkey.currentState!.validate()) {
+                        //   _formkey.currentState!.save();
+                        // } else {
+                        //   Navigator.pushNamed(context, HomeScrennn.routeName);
+                        // }
+                        // if(emailcont.text == "fezaiala@gmail.com"){
+
+                        // }
+                        double s = 0;
+                        users.forEach((user) {
+                          if (user.email == emailcont.text &&
+                              user.password == passwordcont.text) {
+                            s = 1;
+                          }
+                        });
+                        if (s == 1) {
+                          Navigator.pushNamed(context, HomeScrennn.routeName);
+                        } else {
+                          CoolAlert.show(
+                            context: context,
+                            type: CoolAlertType.error,
+                            text: "Incorrect Information",
+                            confirmBtnColor: Colors.orange,
+                          );
+                        }
+                      },
+                      // Navigator.pushNamed(context, HomeScrennn.routeName),
                       child: Text(
                         "Continue",
                         style: TextStyle(fontSize: 18, color: Colors.white),
@@ -145,9 +182,9 @@ class _forminpuState extends State<forminpu> {
 
                   SocialMedia(src: "assets/images/gmail.PNG"),
                   Spacer(),
-                  SocialMedia(src: "assets/images/gmail.PNG"),
+                  SocialMedia(src: "assets/images/fac.PNG"),
                   Spacer(),
-                  SocialMedia(src: "assets/images/gmail.PNG"),
+                  SocialMedia(src: "assets/images/twt.PNG"),
                   Spacer()
                 ],
               ),
@@ -164,10 +201,15 @@ class _forminpuState extends State<forminpu> {
                     "Dont't have an account?",
                     style: TextStyle(fontSize: 16),
                   ),
-                  Text(
-                    "Sing up",
-                    style: TextStyle(fontSize: 16, color: Colors.orange),
-                  )
+                  FlatButton(
+                    child: Text(
+                      "Sing up",
+                      style: TextStyle(fontSize: 16, color: Colors.orange),
+                    ),
+                    onPressed: () {
+                      Navigator.pushNamed(context, Singup.routeName);
+                    },
+                  ),
                 ],
               )
             ],
@@ -185,6 +227,34 @@ class _forminpuState extends State<forminpu> {
     return Column(
         children: List.generate(
             errors.length, (index) => ErrorForm(error: errors[index])));
+  }
+
+  /// ****************************Message Erreur Section*************************/
+
+  Visibility MessageEreur(visible) {
+    return Visibility(
+      visible: visible,
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        child: SizedBox(
+            width: double.infinity,
+            height: 50,
+            // ignore: deprecated_member_use
+            child: FlatButton(
+              padding: EdgeInsets.symmetric(vertical: 10, horizontal: 10),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(20)),
+              color: Color.fromARGB(255, 238, 182, 182),
+              onPressed: () {},
+              // Navigator.pushNamed(context, HomeScrennn.routeName),
+              child: Text(
+                erreur[0],
+                style: TextStyle(
+                    fontSize: 18, color: Color.fromARGB(255, 153, 3, 3)),
+              ),
+            )),
+      ),
+    );
   }
 }
 

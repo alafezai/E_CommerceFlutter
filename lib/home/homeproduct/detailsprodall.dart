@@ -2,19 +2,20 @@
 
 import 'package:ecommerce/home/composent/ProductDetailBody.dart';
 import 'package:ecommerce/home/composent/modele/Cart.dart';
-import 'package:ecommerce/home/composent/modele/Product.dart';
+import 'package:ecommerce/home/homeproduct/bodyAllprd.dart';
+
+import 'package:ecommerce/home/homeproduct/product.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class DetailsScreen extends StatelessWidget {
-  static String routeName = "/details";
-  DetailsScreen({Key? key}) : super(key: key);
+class DeilsAllProd extends StatelessWidget {
+  static String routeName = "/detailsprodhome";
+  DeilsAllProd({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     //  final ProductDetailsarg arguments = ModalRoute.of(context).settings.arguments;
-    final args =
-        ModalRoute.of(context)!.settings.arguments as ProductDetailsarg;
+    final args = ModalRoute.of(context)!.settings.arguments as ProductargV2;
     return Scaffold(
         backgroundColor: Color(0xFFF5F6F9),
         appBar: AppBar(
@@ -34,9 +35,23 @@ class DetailsScreen extends StatelessWidget {
                 alignment: Alignment.center)),
         body: Column(
           children: [
-            ProductDetailsBody(
-              product: args.product,
+            /********************************************************************** */
+            // ProductDetailsBody(
+            //   product: args.product,
+            // ),
+            Column(
+              children: [
+                SizedBox(
+                  width: 238,
+                  child: AspectRatio(
+                    aspectRatio: 1,
+                    child: Image.asset(args.product.images[0]),
+                  ),
+                ),
+              ],
             ),
+
+            /***************************************************************************** */
             DetailsName(
               color: Colors.white,
               child: Column(
@@ -102,7 +117,6 @@ class DetailsScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20)),
                 color: Colors.orange,
                 onPressed: () {
-                  //    Navigator.pushNamed(context, SinginScreen.routeName);
                   CartModel prod = CartModel(product: args.product, Nbitems: 1);
                   testCart.add(prod);
                 },
@@ -145,7 +159,7 @@ class DetailsScreen extends StatelessWidget {
 // }
 
 class ProductDetailsarg {
-  final Product product;
+  final ProductHome product;
 
   // ignore: invalid_required_positional_param
   ProductDetailsarg({required this.product});

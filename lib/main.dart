@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         // ignore: deprecated_member_use
         appBarTheme: AppBarTheme(
@@ -82,7 +83,7 @@ class _MyHomePageState extends State<MyHomePage> {
           // ignore: prefer_const_literals_to_create_immutables
           children: [
             Container(
-              height: 500,
+              height: 460,
               child: Expanded(
                 flex: 3,
                 child: PageView.builder(
@@ -140,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
   Container todoLis({required int index}) {
     return Container(
       margin: EdgeInsets.only(right: 5),
-      height: 6,
+      height: 5,
       width: curntPage == index ? 20 : 6,
       decoration: BoxDecoration(
           color: curntPage == index ? Colors.orange : Color(0xFFD8D8D8),

@@ -2,6 +2,9 @@ import 'package:ecommerce/cart/cart.dart';
 import 'package:ecommerce/detailsScreen/details.dart';
 import 'package:ecommerce/home/composent/body.dart';
 import 'package:ecommerce/home/homeScreen.dart';
+import 'package:ecommerce/home/homeproduct/body.dart';
+import 'package:ecommerce/home/homeproduct/detailsprodall.dart';
+import 'package:ecommerce/singupin/Singup.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:ecommerce/singupin/forgetpasswordscreen.dart';
 import 'package:ecommerce/singupin/singin.dart';
@@ -16,5 +19,9 @@ final Map<String, WidgetBuilder> routes = {
 // ignore: prefer_const_constructors
   DetailsScreen.routeName: (context) => DetailsScreen(),
   // ignore: prefer_const_constructors
-  CartScreen.routeName: (context) => CartScreen()
+  CartScreen.routeName: (context) => CartScreen(),
+  // ignore: prefer_const_constructors
+  Singup.routeName: (context) => Singup(),
+  BodyProduct.routeName: (context) => BodyProduct(),
+  DeilsAllProd.routeName: (context) => DeilsAllProd(),
 };
